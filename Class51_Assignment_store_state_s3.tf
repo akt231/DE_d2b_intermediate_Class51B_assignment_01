@@ -7,7 +7,7 @@ provider "aws" {
 
 # Create an AWS EC2 instance
 resource "aws_instance" "example_instance" {
-  ami           = "ami-053b0d53c279acc90" 
+  ami           = "ami-0fc5d935ebf8bc3bc"
   instance_type = "t2.micro"
 }
 
@@ -16,15 +16,11 @@ output "public_ip" {
   value = aws_instance.example_instance.public_ip
 }
 
-
-
-
-
 #==============================================================================
 #Create an S3 Bucket: create an S3 bucket to store the Terraform state files
-# replace "your-unique-bucket-name" with a unique name for your bucket.
+# replace "unique-bucket-name-akt" with a unique name for your bucket.
 resource "aws_s3_bucket" "terraform_state_bucket" {
-  bucket = "your-unique-bucket-name"
+  bucket = "unique-bucket-name-akt"
   
   tags = {
   Name        = "My bucket"
@@ -38,7 +34,7 @@ resource "aws_s3_bucket" "terraform_state_bucket" {
 #Optional Step: Locking: Replace "your-dynamodb-table-name" with the name of your DynamoDB table.
 terraform {
   backend "s3" {
-    bucket         = "your-unique-bucket-name"
+    bucket         = "unique-bucket-name-akt"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     encrypt        	   = true
